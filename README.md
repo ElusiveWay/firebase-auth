@@ -1,7 +1,6 @@
 # firebase-auth app
 
 [netlify link](https://elusiveway-firebase-auth.netlify.app/)  
-[github.io link](https://elusiveway.github.io/firebase-auth)  
 
 
 This project was generated with *Angular CLI*.
