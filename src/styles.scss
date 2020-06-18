@@ -1,1 +1,76 @@
-/* You can add global styles to this file, and also import other style files */
+.center-h{
+    text-align: center;
+}
+.left-sp{
+    position: absolute;
+    left:40px;
+    border-radius: .2em;
+    transform: scale(.7);
+    transform-origin: left;
+}
+.right-sp{
+    position: absolute;
+    right:40px;
+    border-radius: .2em;
+    transform: scale(.7);
+    transform-origin: right;
+    color:#017cff;
+}
+
+.app-container{
+    padding:70px 0;
+}
+.app-sign-page-wrapper{ 
+    display: flex;
+    justify-content: center;
+    align-items: start;
+    form{
+        width:35vw;
+        margin:50px;
+        button.btn{
+            margin:0;
+        }
+    }
+}
+nav.app-navbar{
+    padding: 0.2rem 1rem;
+    position: fixed;
+    width:100%;
+    top:0;
+    background-color: rgba(245, 245, 245, 0.377);
+}
+.app-footer{
+    bottom: 0;
+    width:100%;
+    position: fixed;
+}
+.app-footer,
+.app-navbar{
+    z-index: 10;
+}
+li.active{
+    background-color: rgba(128, 128, 128, 0.164);
+    border-radius: .3em;
+}
+.btn-info.sub-btn:disabled{
+    background-color: #b5d5e0 !important;
+}
+.notificator-alert.alert.actived{
+    left:-100vw;
+    opacity: 0;
+    transform: translate(-50%,50%);
+}
+.notificator-alert.alert{
+    display: inline-block;
+    width: auto;
+    padding:2rem;
+    font-size: 1.5rem;
+    position: fixed;
+    text-align: center;
+    z-index: 11;
+    left:50%;
+    top:30%;
+    transform: translate(-50%,-50%);
+    white-space: pre-wrap;
+    transition: left .5s linear 3.1s, transform .5s ease-out 2.5s,opacity .5s ease-out 2.5s;
+}

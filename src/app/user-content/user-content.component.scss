@@ -1,0 +1,95 @@
+@import url('https://fonts.googleapis.com/css?family=Roboto&display=swap');
+
+.column_one{
+    width: 250px;
+}
+.column_two{
+    width:250px;
+}
+
+.card{
+    position:relative;
+    background-color: #ffffff;
+    height: 300px;
+    width:500px;
+    overflow: hidden;
+    transition-duration: 2s;
+    border-radius:5px;
+    cursor: pointer;
+    box-shadow: 0 0 20px gray;
+    transition: .4s;
+    transform: translate(10px,10px);
+    &:hover{
+        transform: translate(-10px,-10px);
+        box-shadow: 20px 20px 20px gray;
+    }
+}
+
+.card img{
+    border: 8px solid white;
+    z-index: 100;
+    height: 480px;
+    widows: 480px;
+    border-radius: 240px;
+    margin-top:-420px;
+    margin-left: 270px;
+    transition-duration: 1.5s;
+    right: 0px;
+    overflow: hidden;
+}
+
+.card:hover img{
+    margin-left:200px;
+}
+
+.text{
+    font-family: 'Roboto', sans-serif;
+    margin-left: 15px;
+    margin-top: 30px;
+}
+
+.text h3{
+    font-weight: 200;
+}
+
+.text span{
+    font-weight: 800;
+}
+
+.line{
+    border:1px solid gray;
+    width: 220px;
+    margin-bottom: 15px;
+    border-radius:1px;
+}
+
+.text p{
+    margin-bottom:10px;
+}
+
+.text i{
+    margin-left: 3px;
+    color: grey;
+}
+
+.title{
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+    background-color: rgba(128, 128, 128, 0.164);
+    color: #00000081;
+    font-size: 25px;
+    padding-top:5px;
+    padding-left:20px;
+    height: 50px;
+    width:400px;
+    margin-top:60px;
+}
+
+.content-wrapper{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    width: 100%;
+    height: 100%;
+    min-height: 70vh;
+}

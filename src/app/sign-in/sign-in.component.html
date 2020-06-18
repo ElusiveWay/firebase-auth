@@ -1,0 +1,18 @@
+<!-- Default form login -->
+<form (submit)="fb('in',email, pass)" class="app-sign-in text-center border border-light p-5">
+
+    <p class="h4 mb-4">Sign in</p>
+  
+    <!-- Email -->
+    <input #mail="ngModel" [(ngModel)]="email" required pattern='^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$' type="email" name="email"  class="form-control mb-4" placeholder="Email">
+  
+    <!-- Password -->
+    <input #passw="ngModel" [(ngModel)]="pass" required name="pass" type="password" pattern="^[0-9a-zA-Z]{6,20}$" class="form-control mb-4" placeholder="Password">
+
+    <!-- Sign in button -->
+    <button [disabled]="passw.invalid || mail.invalid" mdbBtn color="info" block="true" class="sub-btn my-4" type="submit">Sign in</button>
+  
+    <app-social-media></app-social-media>
+  
+  </form>
+  <!-- Default form login -->
