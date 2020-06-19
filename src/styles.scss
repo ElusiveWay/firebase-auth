@@ -2,8 +2,10 @@
     text-align: center;
 }
 .left-sp{
+    font-size: 3vw;
     position: absolute;
     left:40px;
+    margin-top: -40px;
     border-radius: .2em;
     transform: scale(.7);
     transform-origin: left;
@@ -37,12 +39,18 @@ nav.app-navbar{
     position: fixed;
     width:100%;
     top:0;
-    background-color: rgba(245, 245, 245, 0.377);
+    background-color: rgba(245, 245, 245, 0.877);
 }
 .app-footer{
     bottom: 0;
     width:100%;
     position: fixed;
+    &{
+        height: 50px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
 }
 .app-footer,
 .app-navbar{
@@ -63,7 +71,7 @@ li.active{
 .notificator-alert.alert{
     display: inline-block;
     width: auto;
-    padding:2rem;
+    padding:1.5rem;
     font-size: 1.5rem;
     position: fixed;
     text-align: center;
@@ -74,3 +82,4 @@ li.active{
     white-space: pre-wrap;
     transition: left .5s linear 3.1s, transform .5s ease-out 2.5s,opacity .5s ease-out 2.5s;
 }
+@import './responsive.scss'

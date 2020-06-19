@@ -1,10 +1,13 @@
-<h2 *ngIf="isMessage" style="display:inline-block;margin-top:1em"[ngStyle]="{'opacity':'1','padding':message?'1rem':'0','color':'#017cff','backgroundColor':messageColor}"class="left-sp">{{message}}</h2>
-<h2 *ngIf="isMessage" style="display:inline-block;margin-top:1em" class="right-sp"><i class="fab fa-angular"></i></h2>
-<h1 style="margin-top:2vw"class="center-h">Are you a member?</h1>
-<h3 *ngIf="isPage" class="center-h">Register or Login, dear friend!</h3>
-<h3 *ngIf="isUp" class="center-h">Register, my darling!</h3>
-<h3 *ngIf="isIn" class="center-h">Login, my brave warrior!</h3>
-<div class="app-sign-page-wrapper">
-    <app-sign-up *ngIf="isUp || isPage"></app-sign-up> 
-    <app-sign-in *ngIf="isIn || isPage"></app-sign-in> 
+<div class="app-sign-page-container">
+    <h2 *ngIf="isMessage" style="display:inline-block;margin-top: -.5em;margin-left: -.8em;"[ngStyle]="{'opacity':'1','padding':message?'1rem':'0','color':'#017cff','backgroundColor':messageColor}"class="left-sp">{{message}}</h2>
+    <h2 *ngIf="isMessage" style="display:inline-block;margin-top: -.5em;margin-right: -.8em;" class="right-sp"><i class="fab fa-angular"></i></h2>
+    <h1 style="margin-top:2vw"class="center-h">Are you a member?</h1>
+    <hr>
+    <h3 *ngIf="isPage" class="center-h">Register or Login, please!</h3>
+    <h3 *ngIf="isUp" class="center-h">Register, brave warrior!</h3>
+    <h3 *ngIf="isIn" class="center-h">Login, mate!</h3>
+    <div class="app-sign-page-wrapper">
+        <app-sign-up *ngIf="isUp || isPage"></app-sign-up> 
+        <app-sign-in *ngIf="isIn || isPage"></app-sign-in> 
+    </div>
 </div>
