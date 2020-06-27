@@ -1,7 +1,7 @@
 <div class="app-sign-page-container">
-    <h2 *ngIf="isMessage" style="display:inline-block;margin-top: -.5em;margin-left: -.8em;"[ngStyle]="{'opacity':'1','padding':message?'1rem':'0','color':'#017cff','backgroundColor':messageColor}"class="left-sp">{{message}}</h2>
-    <h2 *ngIf="isMessage" style="display:inline-block;margin-top: -.5em;margin-right: -.8em;" class="right-sp"><i class="fab fa-angular"></i></h2>
-    <h1 style="margin-top:2vw"class="center-h">Are you a member?</h1>
+    <h2 *ngIf="isMessage" [ngStyle]="{'opacity':'1','padding':message?'1rem':'0','color':'#017cff','backgroundColor':messageColor}"class="sign-page-h2 left-sp">{{message}}</h2>
+    <h2 *ngIf="isMessage"  class="sign-page-h2 right-sp"><i class="fab fa-angular"></i></h2>
+    <h1 class="center-h">Are you a member?</h1>
     <hr>
     <h3 *ngIf="isPage" class="center-h">Register or Login, please!</h3>
     <h3 *ngIf="isUp" class="center-h">Register, brave warrior!</h3>

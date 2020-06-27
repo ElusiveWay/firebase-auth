@@ -12,8 +12,10 @@ import { SignInComponent } from './sign-in/sign-in.component';
 import { SignPageComponent } from './sign-page/sign-page.component';
 import { HeaderBarComponent } from './header-bar/header-bar.component';
 import { FooterBarComponent } from './footer-bar/footer-bar.component';
-import { NotificWrapComponent } from './notific-wrap/notific-wrap.component';
 import { SocialMediaComponent } from './social-media/social-media.component';
+import { AuthService } from './services/auth.service'
+import { NotifyService } from './services/app.notify.service'
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -23,16 +25,15 @@ import { SocialMediaComponent } from './social-media/social-media.component';
     SignPageComponent,
     HeaderBarComponent,
     FooterBarComponent,
-    NotificWrapComponent,
     SocialMediaComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     FormsModule,
-    MDBBootstrapModule.forRoot() 
+    MDBBootstrapModule.forRoot()
   ],
-  providers: [],
+  providers: [ AuthService, NotifyService ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

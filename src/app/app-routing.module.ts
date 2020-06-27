@@ -4,6 +4,7 @@ import { UserContentComponent } from './user-content/user-content.component'
 import { SignPageComponent } from './sign-page/sign-page.component'
 import { AppGuard } from './app-guard';
 
+
 const routes: Routes = [
   { path: 'main', component: UserContentComponent, canActivate: [AppGuard]},
   { path: '', redirectTo: '/main', pathMatch: 'full'},

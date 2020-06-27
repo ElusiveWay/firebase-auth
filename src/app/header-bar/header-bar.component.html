@@ -1,13 +1,5 @@
-<!--Navbar-->
 <mdb-navbar SideClass="app-navbar navbar navbar-expand-lg " [containerInside]="false">
-
-    <!-- Navbar brand -->
-    <mdb-navbar-brand><a routerLink="/main" routerLinkActive="active" style="vertical-align: center;" class="navbar-brand"><i style="margin-left:.2em;margin-top:0.1em;font-size: 2em;" class="fab fa-foursquare"></i><h3 style="display:inline-block">irebase Auth App</h3></a></mdb-navbar-brand>
-  
-    <!-- Collapsible content -->
-    <!-- <links> -->
-  
-      <!-- Links -->>
+    <mdb-navbar-brand><a routerLink="/main" routerLinkActive="active" class="header-bar-a navbar-brand"><i class="fab fa-foursquare"></i><h3>irebase Auth App</h3></a></mdb-navbar-brand>
       <ul class="navbar-nav ml-auto">
         <li class="nav-item main-btn">
           <a routerLink="/main" routerLinkActive="active" class="nav-link waves-light" mdbWavesEffect><i class="fas fa-home"></i> Main</a>
@@ -21,21 +13,5 @@
         <li class="nav-item logout-btn">
           <a *ngIf="!isUser" (click)="fb('out')" routerLink="/signpage" routerLinkActive="active" class="nav-link waves-light" mdbWavesEffect><i class="fas fa-sign-out-alt"></i>Logout</a>
         </li>
-  
-        <!-- 
-        <li class="nav-item dropdown" dropdown>
-          <a dropdownToggle mdbWavesEffect type="button" class="nav-link dropdown-toggle waves-light" mdbWavesEffect>
-            <mdb-icon fas icon="user"></mdb-icon> Profile<span class="caret"></span></a>
-          <div *dropdownMenu class="dropdown-menu dropdown-menu-right dropdown dropdown-primary" role="menu">
-            <a class="dropdown-item waves-light" mdbWavesEffect href="#">My account</a>
-            <a class="dropdown-item waves-light" mdbWavesEffect href="#">Log out</a>
-          </div>
-        </li> -->
-  
       </ul>
-      <!-- Links -->
-    <!-- </links> -->
-    <!-- Collapsible content -->
-  
-  </mdb-navbar>
-  <!--/.Navbar-->
+</mdb-navbar>

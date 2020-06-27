@@ -1,8 +1,6 @@
-import { Component, OnInit } from '@angular/core';
-import * as firebase from "firebase/app";
-import "firebase/auth";
-import {eventDispatcher} from '../services/app-notify';
-import {ActionTypes} from '../actions';
+import { Component } from '@angular/core';
+import { AuthService } from '../services/auth.service'
+import { NotifyService } from '../services/app.notify.service'
 import { Router } from '@angular/router'
 
 @Component({
@@ -10,62 +8,43 @@ import { Router } from '@angular/router'
   templateUrl: './social-media.component.html',
   styleUrls: ['./social-media.component.scss']
 })
-export class SocialMediaComponent implements OnInit {
+export class SocialMediaComponent {
 
-  constructor(private router : Router) { }
+  constructor(public note: NotifyService, public authService: AuthService, public router : Router) { }
 
-  ngOnInit(): void {
-    this.provider = new firebase.auth.GoogleAuthProvider();
-    this.provider.addScope('https://www.googleapis.com/auth/contacts.readonly');
-    this.gitProvider = new firebase.auth.GithubAuthProvider();
-    this.faceProvider = new firebase.auth.FacebookAuthProvider();
-    this.faceProvider.addScope('user_photos');
-    firebase.auth().useDeviceLanguage();
-  }
-  provider: firebase.auth.GoogleAuthProvider
-  faceProvider: firebase.auth.FacebookAuthProvider
-  gitProvider: firebase.auth.GithubAuthProvider
   google(){
-    firebase.auth().signInWithPopup(this.provider).then((result)=>{
-      eventDispatcher.next({type: ActionTypes.CREATE_NOTIFY, payload: {
-        message : `Logged in!\nGoogle Login Success!`,
-        color: 'success'
-      }});
+    const thenn = (result : any) => {
+      this.note.showSuccess('Google')
       this.router.navigateByUrl('/main')
-    }).catch(function(error) {
-      eventDispatcher.next({type: ActionTypes.CREATE_NOTIFY, payload: {
-        message : `Wrong!\n${error.message}!`,
+    }
+    const catchh = (errorr : any) => {
+      this.note.show({
+        message : `Wrong!\n${errorr.message}!`,
         color: 'danger'
-      }});
-    });
-  }
+      })
+    }
+    this.authService.GoogleAuth(thenn, catchh)
+}
   face(){
-    firebase.auth().signInWithPopup(this.faceProvider).then((result) => {
-      eventDispatcher.next({type: ActionTypes.CREATE_NOTIFY, payload: {
-        message : `Logged in!\nFacebook Login Success!`,
-        color: 'success'
-      }});
-    this.router.navigateByUrl('/main')
-    }).catch(function(error) {
-      eventDispatcher.next({type: ActionTypes.CREATE_NOTIFY, payload: {
-        message : `Wrong!\n${error.message}!`,
-        color: 'danger'
-      }});
-    });
+      const thenn = (result : any) => {
+        this.note.showSuccess('Facebook')
+        this.router.navigateByUrl('/main')
+      }
+      const catchh = (errorr : any) => {
+        this.note.show({
+          message : `Wrong!\n${errorr.message}!`,
+          color: 'danger'
+        })
+      }
+      this.authService.FacebookAuth(thenn, catchh)
   }
   git(){
-    firebase.auth().signInWithPopup(this.gitProvider).then((result)=>{
-      eventDispatcher.next({type: ActionTypes.CREATE_NOTIFY, payload: {
-        message : `Logged in!\nGithub Login Success!`,
-        color: 'success'
-      }});
+    const thenn = (result : any) => {
+      this.note.showSuccess('Github')
       this.router.navigateByUrl('/main')
-    }).catch(function(error) {
-      eventDispatcher.next({type: ActionTypes.CREATE_NOTIFY, payload: {
-        message : `Wrong!\n${error.message}!`,
-        color: 'danger'
-    }});
-    });
-  }
+    }
+    const catchh = (errorr : any) => this.note.showDanger(errorr.message)
+    this.authService.GithubAuth(thenn, catchh)
+}
   
 }
