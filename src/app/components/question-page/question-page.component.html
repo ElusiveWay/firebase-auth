@@ -1,0 +1,55 @@
+<div *ngIf="this.question !== undefined" class="question-page">
+    <h4 class="question-page-author">Author : {{author.name || author.email}}</h4>
+    <h1 class="question-page-title">{{question.title}}</h1>
+    <hr>
+    <p class="question-page-text">{{question.text}}</p>
+    <div class="question-page-panel">
+        <div class="question-page-tags tags">
+            <div *ngFor="let tag of tags" class="tag-wrapper">
+                <a name="{{tag}}" class="tags-tag">{{tag}}</a>
+                <span class="separator">|</span>
+            </div>
+        </div>
+        <div class="question-page-buttons">
+            <button class="btn btn-success">Approve</button>
+            <button class="btn btn-warning">Edit</button>
+            <button class="btn btn-danger">Delete</button>
+        </div>
+    </div>
+    <hr>
+    <div class="question-page-commentForm qForm">
+        <textarea [(ngModel)]="message" placeholder="Write your solution here" rows="5" class="form-control qForm-comment"></textarea>
+        <button [disabled]="message.length < 10" class="btn btn-primary">Send</button>
+    </div>
+    <div class="comments-wrapper">
+        <div data-id="" class="comment">
+            <div class="comment__author-wrapper">
+                <span>User:</span>
+                <i class="user-ava fas fa-user-circle"></i>
+                <span class="comment__email">lovenikol@gmail.com</span>
+            </div>
+            <p class="comment__text">
+                Lorem ipsum dolor sit amet consectetur, adipisicing elit. Totam facilis delectus architecto reiciendis atque libero autem praesentium! Tempora magnam reprehenderit praesentium totam tenetur necessitatibus blanditiis sed vitae quod distinctio
+            </p>
+            <div class="comment__side-panel">
+                <i class="status fas fa-info-circle neok"></i>
+                <i style='display: none' class="status fas fa-check-circle ok"></i>
+                <button class="btn btn-info comment__solution">Solution!</button>
+            </div>
+        </div>
+        <div data-id="" class="comment">
+            <div class="comment__author-wrapper">
+                <span>User:</span>
+                <i class="user-ava fas fa-user-circle"></i>
+                <span class="comment__email">lovenikol@gmail.com</span>
+            </div>
+            <p class="comment__text">
+                Lorem ipsum dolor sit amet consectetur, adipisicing elit. Totam facilis delectus architecto reiciendis atque libero autem praesentium! Tempora magnam reprehenderit praesentium totam tenetur necessitatibus blanditiis sed vitae quod distinctio
+            </p>
+            <div class="comment__side-panel">
+                <i style='display: none' class="status fas fa-info-circle neok"></i>
+                <i class="status fas fa-check-circle ok"></i>
+            </div>
+        </div>
+    </div>
+</div>

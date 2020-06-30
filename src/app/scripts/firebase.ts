@@ -38,6 +38,6 @@ export async function fb(action: string, email: string = '', password: string = 
             await firebase.auth().signOut().then(() => new NotifyService().showLogout()).catch(function(error) {
                 return error
             });
-            router.navigateByUrl('/signpage')
+            if (router) router.navigateByUrl('/signpage')
     }
 }

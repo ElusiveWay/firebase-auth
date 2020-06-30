@@ -7,7 +7,7 @@ import 'firebase/auth'
 @Injectable({
     providedIn: 'root'
   })
-export class AppGuard implements CanActivate{
+export class Logined implements CanActivate{
     constructor(private router: Router){}
     canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot) : Observable<boolean> | boolean{
         if ( firebase.auth().currentUser !== null ) {

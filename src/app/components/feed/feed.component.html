@@ -1,0 +1,12 @@
+
+<div class="feed">
+    <div *ngFor="let q of questions">
+        <app-qusetion-block 
+        *ngIf="((q.owner===uid && flag==='my') || (!q.moded && flag==='mod' && isAdmin) || (flag!=='my' && flag!=='mod' && isAdmin !== undefined && ((!isAdmin && q.moded) || isAdmin)))" 
+        (refreshData)="refresh()" [data]="q" [isAdmin]="isAdmin" ></app-qusetion-block>
+    </div>
+</div>
+<h1 class="centered" *ngIf="isEmpty && flag=='mod' && isAdmin !== undefined && questions !== undefined">There is nothing to approve..</h1>
+<h1 class="centered" *ngIf="isEmpty && flag=='my' && isAdmin !== undefined && questions !== undefined">There are no your own questions..</h1>
+<h1 class="centered" *ngIf="isEmpty && flag!=='my' && flag!=='mod' && isAdmin !== undefined && questions !== undefined">There are no questions..</h1>
+<h1 class="centered spin" *ngIf="isAdmin === undefined || questions === undefined"><i class="fas fa-sync-alt"></i></h1>

@@ -1,0 +1,26 @@
+<div    [ngClass]="{
+                    'finished' : false,
+                    'notapproved': !data.moded
+                    }"
+        data-id="{{data.id}}" 
+        class="question-box">
+    <h1 class="title">{{data.title}}</h1>
+    <hr>
+    <div>
+        <span class="date">{{data.date}}</span>
+        <div class="tags">
+            <a href="#" class="tag">Tag 1</a>
+            <span class="separate">|</span>
+            <a href="#" class="tag">Tag 2</a>
+            <span class="separate">|</span>
+            <a href="#" class="tag">Tag 3</a>
+        </div>
+    </div>
+    <hr>
+    <div class="bntss end">
+        <button routerLink="/questions/{{data.id}}" routerLinkActive="active" class="btn btn-info open">Open</button>
+        <button *ngIf="( logined && (owner === logined.uid))" class="btn btn-info open">Edit</button>
+        <button (click)="approve(data.id)" *ngIf="isAdmin && !data.moded" class="btn btn-success approve">Approve</button>
+        <button *ngIf="( logined && (owner === logined.uid)) || isAdmin" (click)="delete(data.id)" class="btn btn-danger delete">Delete</button>
+    </div>
+</div>

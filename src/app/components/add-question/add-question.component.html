@@ -1,0 +1,32 @@
+<div class="new-question">
+    <h1 class="title">New question</h1>
+    <hr>
+    <fieldset class="form-group title-input">
+        <label for="new-question-title-input" class="title-title">Title</label>
+        <input type="text" [(ngModel)]="title" required minlength="4" #ti="ngModel" id="new-question-title-input" placeholder="Write your question" class="form-control title-input">
+    </fieldset>
+    <fieldset class="form-group text-input">
+        <label for="new-question-text-input" class="text-title">Text</label>
+        <textarea rows="5" [(ngModel)]="text" minlength="20" required #text1="ngModel" id="new-question-text-input" placeholder="Describe your question" class="form-control text-input"></textarea>
+    </fieldset>
+    <div class="form-check">
+        <input class="form-check-input" name="Tag 1" type="checkbox"  id="new-question-defaultCheck1">
+        <label class="form-check-label" for="new-question-defaultCheck1">
+          Tag 1
+        </label>
+      </div>
+      <div class="form-check">
+        <input class="form-check-input" name="Tag 2" type="checkbox"  id="new-question-defaultCheck2">
+        <label class="form-check-label" for="new-question-defaultCheck2">
+          Tag 2
+        </label>
+      </div>
+      <div class="form-check">
+        <input  class="form-check-input" name="Tag 3" type="checkbox"  id="new-question-defaultCheck3">
+        <label class="form-check-label" for="new-question-defaultCheck3">
+          Tag 3
+        </label>
+        <br>
+        <button (click)="submit()" [disabled]="ti.invalid || text1.invalid"  class="new-question-submit btn btn-primary"><i class="fas fa-plus"></i> Add question</button>
+      </div>
+</div>

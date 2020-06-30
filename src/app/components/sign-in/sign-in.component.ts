@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { fb } from '../scripts/firebase'
+import { fb } from '../../scripts/firebase'
 import { Router } from '@angular/router'
 @Component({
   selector: 'app-sign-in',

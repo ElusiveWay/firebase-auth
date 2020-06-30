@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormsModule } from '@angular/forms';
-import { fb } from '../scripts/firebase'
+import { fb } from '../../scripts/firebase'
 import { Router } from '@angular/router'
 
 @Component({

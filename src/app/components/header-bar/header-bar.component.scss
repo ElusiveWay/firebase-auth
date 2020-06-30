@@ -1,0 +1,21 @@
+.header-bar-a{
+    vertical-align: center;
+    i{
+        margin-left:.2em;margin-top:0.1em;font-size: 2em;
+    }
+    h3{
+        display:inline-block
+    }
+}
+.nav-button{
+    padding:5px 10px !important;
+    margin:0px 20px !important;
+}
+.nav-link:not(.add-quest):hover{
+    transform: translateX(10px);
+}
+@media screen and (max-width: 600px){
+    .nav-button{
+        margin: 0 0 !important;
+    }
+}

@@ -1,0 +1,15 @@
+.feed{
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+}   
+.centered{
+    position: absolute;
+    left:50%;
+    top:50%;
+    transform: translate(-50%,-50%);
+    text-align: center;
+}
+.spin{
+    animation: spin .8s ease-out infinite;
+}

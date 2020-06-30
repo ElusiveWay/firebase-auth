@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { TimeInterval } from 'rxjs';
 import * as firebase from "firebase/app"
 import "firebase/auth"
 

@@ -1,0 +1,30 @@
+<mdb-navbar SideClass="app-navbar navbar navbar-expand-lg " [containerInside]="false">
+    <mdb-navbar-brand><a routerLink="/main" routerLinkActive="active" class="header-bar-a navbar-brand"><i class="fab fa-foursquare"></i><h3>irebase Ask</h3></a></mdb-navbar-brand>
+      <ul class="navbar-nav ml-auto">
+        <li *ngIf="!isUser" class="nav-item main-btn trans">
+          <a *ngIf="!isUser" routerLink="/add" routerLinkActive="active" class="add-quest nav-button nav-link waves-light" mdbWavesEffect><i class="fas fa-plus"></i>Add question</a>
+        </li>
+        <li *ngIf="!isUser" class="nav-item main-btn">
+          <div class="dropdown show">
+            <a [ngClass]="{'btn-secondary': !isAdmin, 'btn-danger': isAdmin}"class="drop-btn nav-button btn dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+              <i class="fas fa-user-tie"></i>    <span *ngIf="isAdmin"> Admin</span><span *ngIf="!isAdmin"> User</span>
+            </a>
+            <div class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownMenuLink">
+              <a routerLink="/main" routerLinkActive="active" class="nav-link waves-light" mdbWavesEffect><i class="fas fa-align-justify"></i> All questions</a>
+              <a routerLink="/my" routerLinkActive="active" class="nav-link waves-light" mdbWavesEffect><i class="fas fa-clipboard"></i> My questions</a>
+              <a routerLink="/profile" routerLinkActive="active" class="nav-link waves-light" mdbWavesEffect><i class="fas fa-home"></i> Profile</a>
+              <a *ngIf="isAdmin" routerLink="/moderate" routerLinkActive="active" class="nav-link waves-light" mdbWavesEffect><i class="fas fa-info-circle"></i> Moderate</a>
+              <a *ngIf="!isAdmin" (click)="switch()" class="nav-link waves-light" mdbWavesEffect><i class="fas fa-random"></i> Switch to Admin</a>
+              <a *ngIf="isAdmin" (click)="switch()" class="nav-link waves-light" mdbWavesEffect><i class="fas fa-random"></i> Switch to User</a>
+              <a *ngIf="!isUser" (click)="fb('out')" routerLink="/signpage" routerLinkActive="active" class="nav-link waves-light" mdbWavesEffect><i class="fas fa-sign-out-alt"></i> Logout</a>
+            </div>
+          </div>
+        </li>
+        <li class="nav-item signin-btn">
+          <a *ngIf="isUser" routerLink="/signin" routerLinkActive="active" class="nav-link waves-light" mdbWavesEffect><i class="fas fa-sign-in-alt"></i>Login</a>
+        </li>
+        <li class="nav-item signup-btn">
+          <a *ngIf="isUser" routerLink="/signup" routerLinkActive="active" class="nav-link waves-light" mdbWavesEffect><i class="fas fa-key"></i>Register</a>
+        </li>
+      </ul>
+</mdb-navbar> 
