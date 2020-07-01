@@ -1,26 +1,34 @@
 <div    [ngClass]="{
-                    'finished' : false,
-                    'notapproved': !data.moded
+                    'finished' : finished && data.moded,
+                    'notapproved': !data.moded,
+                    'normally': data.moded && !finished
                     }"
         data-id="{{data.id}}" 
+        *ngIf="finished !== undefined"
         class="question-box">
+    <div class="info-wrapper">
+        <i class="quest-logo quest-logo1 fas fa-question-circle"></i>
+        <i class="quest-logo quest-logo2 fas fa-pen-square"></i>
+        <i class=" quest-logo quest-logo3 fas fa-check-square"></i>
+        <div class="contacts">
+            <span class="date">{{date.toTimeString().slice(0,8)}} {{date.toLocaleDateString()}}</span>
+            <span class="date">{{owner.email}}</span>
+        </div>
+    </div>
     <h1 class="title">{{data.title}}</h1>
     <hr>
     <div>
-        <span class="date">{{data.date}}</span>
         <div class="tags">
-            <a href="#" class="tag">Tag 1</a>
-            <span class="separate">|</span>
-            <a href="#" class="tag">Tag 2</a>
-            <span class="separate">|</span>
-            <a href="#" class="tag">Tag 3</a>
+            <div *ngFor="let tag of mytags" class="tag-wr">
+                <a class="tag">{{tag}}</a>
+                <span class="separate">|</span>
+            </div>
         </div>
     </div>
-    <hr>
     <div class="bntss end">
         <button routerLink="/questions/{{data.id}}" routerLinkActive="active" class="btn btn-info open">Open</button>
-        <button *ngIf="( logined && (owner === logined.uid))" class="btn btn-info open">Edit</button>
+        <button *ngIf="( logined && (owner.id === logined.uid))" (click)=edit() class="btn btn-info open">Edit</button>
         <button (click)="approve(data.id)" *ngIf="isAdmin && !data.moded" class="btn btn-success approve">Approve</button>
-        <button *ngIf="( logined && (owner === logined.uid)) || isAdmin" (click)="delete(data.id)" class="btn btn-danger delete">Delete</button>
+        <button *ngIf="( logined && (owner.id === logined.uid)) || isAdmin" (click)="delete(data.id)" class="btn btn-danger delete">Delete</button>
     </div>
 </div>

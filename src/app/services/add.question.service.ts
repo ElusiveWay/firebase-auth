@@ -2,14 +2,17 @@ import { Injectable } from '@angular/core';
 import * as firebase from 'firebase'
 import 'firebase/firestore'
 import * as cuid from 'cuid';
+import { isNull } from 'util'
+import { Router } from '@angular/router'
 import { NotifyService } from '../services/app.notify.service'
+import { CommentService } from '../services/comment.service'
 
 
 @Injectable({
   providedIn: 'root'
 })
 export class QuestionsService {
-  constructor(private note : NotifyService) { }
+  constructor(private router: Router, private note : NotifyService ,private comms: CommentService) { }
   db = firebase.firestore();
 
   async getQuestions(){
@@ -34,6 +37,7 @@ export class QuestionsService {
       })
     })
     .catch(e=>e)
+    this.comms.deleteWithQuestion(id)
   }
   async approveQuestion(id : any){
     await this.db.collection('questions').doc(id).update({
@@ -47,10 +51,33 @@ export class QuestionsService {
     })
     .catch(e=>e)
   }
+  async editQuestion(id : any, title : string, text : string, tags : string){
+    await this.db.collection('questions').doc(id).update({
+      title : title,
+      text : text,
+      tags : tags
+    })
+    .then(r=>{
+      this.router.navigateByUrl(`/questions/${id}`)
+      this.note.show({
+        message : "Edited!",
+        color: "success"
+      })
+    })
+    .catch(e=>{
+      this.note.show({
+        message : "Something went wrong!",
+        color: "danger"
+      })
+    })
+  }
   async addQuestion(){
+    if (isNull(firebase.auth().currentUser)) {
+      return false
+    }
     await this.db.collection('questions').add({
       moded: false,
-      date: new Date().toDateString(),
+      date: new Date().getTime(),
       title: (document.querySelector('#new-question-title-input') as  HTMLInputElement).value,
       text: (document.querySelector('#new-question-text-input') as  HTMLInputElement).value,
       tags: JSON.stringify(

@@ -2,10 +2,10 @@ import { Component, OnInit, OnDestroy } from '@angular/core';
 import * as firebase from "firebase/app"
 import "firebase/auth"
 import { isNull } from 'util';
-import { fb } from '../../scripts/firebase'
 import { Subject } from 'rxjs'
 import { takeUntil } from 'rxjs/operators'
 import { FirestoreService } from '../../services/firestore.service'
+import { AuthService } from '../../services/auth.service'
 
 @Component({
   selector: 'app-header-bar',
@@ -14,13 +14,15 @@ import { FirestoreService } from '../../services/firestore.service'
 })
 export class HeaderBarComponent implements OnInit, OnDestroy {
 
-  constructor(private fstore : FirestoreService) { }
+  constructor(private auth : AuthService, private fstore : FirestoreService) { }
   private destroy$: Subject<void> = new Subject<void>();
   ngOnInit(): void {
     this.fstore.isAdminObserver.pipe(
       takeUntil(this.destroy$)
     ).subscribe((v)=> this.isAdmin = v)
-    this.interval = setInterval(()=>this.isUser = isNull(firebase.auth().currentUser), 100)
+    clearInterval(this.interval)
+    this.interval = setInterval(() => this.isUser = isNull(firebase.auth().currentUser), 100 )
+    this.fstore.checkAdmin()
   }
   ngOnDestroy(): void {
     clearInterval(this.interval)
@@ -32,10 +34,8 @@ export class HeaderBarComponent implements OnInit, OnDestroy {
   switch = function(){
     this.fstore.toggleAdmin()
   }
-  fb = async function(...args){
-    if (args[0] === 'out') {
-      fb('out', undefined, undefined)
-    }
+  out(){
+    this.auth.Logout()
   }
   sub : any
   isAdmin : any = false

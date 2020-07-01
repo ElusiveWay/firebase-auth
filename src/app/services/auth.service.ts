@@ -3,12 +3,13 @@ import * as firebase from "firebase/app";
 import "firebase/auth";   
 import {fb} from '../scripts/firebase'  
 import { Router } from '@angular/router';
+import { FirestoreService } from '../services/firestore.service'
 
 @Injectable({
   providedIn: 'root'
 })
 export class AuthService {
-  constructor(public router : Router){}
+  constructor(private fstore: FirestoreService, public router : Router){}
   FacebookAuth(thenn: any = ()=>{}, catchh : any = ()=>{}) {
     const face = new firebase.auth.FacebookAuthProvider();
     face.addScope('user_photos');
@@ -24,16 +25,24 @@ export class AuthService {
   }  
   async AuthLogin(provider : any, thenn : any, catchh: any) {
     return firebase.auth().signInWithPopup(provider)
-    .then((result) => thenn(result)).catch((error) => catchh(error))
+    .then((result) => {
+      this.fstore.checkAdmin()
+      return thenn(result)
+    }).catch((error) => {
+      this.fstore.checkAdmin()
+      return catchh(error)
+    })
   }
   Logout(){
     fb('out')
   }
-  EmailAuth(email: string, pass : string){
-    fb('in',email ,pass, this.router)
+  async EmailAuth(email: string, pass : string){
+    await fb('in',email ,pass, this.router)
+    this.fstore.checkAdmin()
   }
-  Register(email: string, pass : string){
-    fb('up',email ,pass, this.router)
+  async Register(email: string, pass : string){
+    await fb('up',email ,pass, this.router)
+    this.fstore.checkAdmin()
   }
 
 }

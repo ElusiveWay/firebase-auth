@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { fb } from '../../scripts/firebase'
 import { Router } from '@angular/router'
+import { AuthService } from '../../services/auth.service'
 @Component({
   selector: 'app-sign-in',
   templateUrl: './sign-in.component.html',
@@ -8,13 +8,12 @@ import { Router } from '@angular/router'
 })
 export class SignInComponent implements OnInit {
 
-  constructor(private router: Router) { }
+  constructor(private auth : AuthService, private router: Router) { }
   ngOnInit(): void {
 
   }
-  fb = async function(...args){
-    // @ts-ignore
-    fb(...args, router)
+  login(email: any, pass: any){
+    this.auth.EmailAuth(email, pass)
   }
   email: string
   pass: string

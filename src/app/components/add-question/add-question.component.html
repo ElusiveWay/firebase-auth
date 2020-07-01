@@ -1,5 +1,6 @@
 <div class="new-question">
-    <h1 class="title">New question</h1>
+    <h1 *ngIf="uid === undefined" class="title">New question</h1>
+    <h1 *ngIf="uid !== undefined" class="title">Edit question</h1>
     <hr>
     <fieldset class="form-group title-input">
         <label for="new-question-title-input" class="title-title">Title</label>
@@ -27,6 +28,7 @@
           Tag 3
         </label>
         <br>
-        <button (click)="submit()" [disabled]="ti.invalid || text1.invalid"  class="new-question-submit btn btn-primary"><i class="fas fa-plus"></i> Add question</button>
+        <button *ngIf="uid === undefined" (click)="submit()" [disabled]="ti.invalid || text1.invalid"  class="new-question-submit btn btn-primary"><i class="fas fa-plus"></i> Add question</button>
+        <button *ngIf="uid !== undefined" (click)="edit()" [disabled]="ti.invalid || text1.invalid"  class="new-question-submit btn btn-primary"><i class="fas fa-edit"></i> Edit question</button>
       </div>
 </div>

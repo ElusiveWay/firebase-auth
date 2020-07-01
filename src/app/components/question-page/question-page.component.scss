@@ -32,7 +32,7 @@
     }
     .question-page-commentForm{
         button{
-            margin: 15px;
+            margin: 15px 5px;
         }
         textarea{
             resize: none;
@@ -54,6 +54,7 @@
             }
             .comment__side-panel,
             .comment__author-wrapper{
+                position: relative;
                 display: flex;
                 flex-direction: column;
                 flex-basis: 150px;
@@ -61,11 +62,18 @@
                 justify-content: flex-start;
                 padding-right: 10px;
                 padding-left: 10px;
+                .trash-comment{
+                    position: absolute;
+                    right:10px;
+                    top:5px;
+                    color:rgb(168, 38, 38);
+                    cursor: pointer;
+                }
                 .comment__email{
                     margin-top:10px;
                 }
                 .user-ava{
-                    color:rgba(128, 128, 128, 0.719);
+                    color:rgba(12, 8, 8, 0.719);
                     font-size: 100px;
                     margin:auto;
                 }
@@ -81,6 +89,7 @@
                 }
             }
             .comment__author-wrapper{
+                flex-basis: 300px;
                 border-right: 1px solid rgba(169, 169, 169, 0.562);
             }
             .comment__side-panel{

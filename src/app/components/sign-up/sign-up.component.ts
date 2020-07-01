@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { fb } from '../../scripts/firebase'
 import { Router } from '@angular/router'
+import { AuthService } from '../../services/auth.service'
 
 @Component({
   selector: 'app-sign-up',
@@ -10,13 +11,12 @@ import { Router } from '@angular/router'
 })
 export class SignUpComponent implements OnInit {
 
-  constructor(private router: Router) { }
+  constructor(private auth: AuthService, private router: Router) { }
 
   ngOnInit(): void {
   }
-  fb = async function(...args){
-    // @ts-ignore
-    fb(...args,router)
+  register(email: any, pass : any){
+    this.auth.Register(email, pass)
   }
   email: string 
   pass: string 

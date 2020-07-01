@@ -3,6 +3,7 @@ import "firebase/auth"
 import {Router} from '@angular/router'
 import { NotifyService } from '../services/app.notify.service'
 
+
 export async function fb(action: string, email: string = '', password: string = '', router: Router = undefined){
     switch (action){
         case 'in':

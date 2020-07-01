@@ -1,7 +1,7 @@
 .feed{
     display: flex;
     flex-wrap: wrap;
-    justify-content: center;
+    justify-content: flex-start;
 }   
 .centered{
     position: absolute;
@@ -12,4 +12,12 @@
 }
 .spin{
     animation: spin .8s ease-out infinite;
+}
+@media screen and (max-width: 750px){
+    .feed{
+        justify-self: center;
+        & > *{
+            margin: auto;
+        }
+    }
 }

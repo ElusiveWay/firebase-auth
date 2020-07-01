@@ -2,17 +2,31 @@
     display:flex;
     flex-direction: column;
     align-items: center;
-    width:260px;
-    height:200px;
+    width:380px;
+    height:250px;
     box-shadow: 0 0 5px gray;
     border:1px solid #d9d9d9 !important;
-    margin:30px;
-    background-color: #ffff0022;
+    margin:20px;
+    &  .quest-logo{
+        display: none;
+    }
     &.finished{
-        background-color: #04ff0022;
+        & .quest-logo3{
+            color: green;
+            display: inline-block;
+        }
     }
     &.notapproved{
-        background-color: #0008ff13;
+        & .quest-logo2{
+            color: lightseagreen;
+            display: inline-block;
+        }
+    }
+    &.normally{
+        & .quest-logo1{
+            color: yellowgreen;
+            display: inline-block;
+        }
     }
     h1{
         font-size: 20px;
@@ -44,7 +58,7 @@
         .tags{
             display: flex;
             align-items: flex-start;
-            font-size: 11px;
+            font-size: 15px;
             .separate{
                 margin:0 5px;
             }
@@ -56,5 +70,23 @@
     button{
         margin: 0 3px;
         padding: 3px;
+    }
+}
+.tag-wr:last-child > .separate{
+    display: none;
+}
+.info-wrapper{
+    justify-content: space-around;
+    display: flex;
+    margin-top: 20px;
+    margin-bottom: 10px;
+    .quest-logo{
+        font-size: 70px;
+        color: rgb(131, 131, 131);
+    }
+    .contacts{
+        display: flex;
+        flex-direction: column;
+        align-items: flex-end;
     }
 }

@@ -16,6 +16,7 @@ const routes: Routes = [
   { path: 'my', component: MyQuestionsComponent, canActivate: [Logined]},
   { path: 'moderate', component: ModerateComponent, canActivate: [Logined, FirestoreService]},
   { path: 'add', component: AddQuestionComponent, canActivate: [Logined]},
+  { path: 'edit/:uid', component: AddQuestionComponent, canActivate: [Logined]},
   { path: 'profile', component: UserContentComponent, canActivate: [Logined]},
   { path: 'main', component: FeedComponent, canActivate: [Logined]},
   { path: 'questions', component: FeedComponent, canActivate: [Logined]},

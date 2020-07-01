@@ -16,7 +16,7 @@
               <a *ngIf="isAdmin" routerLink="/moderate" routerLinkActive="active" class="nav-link waves-light" mdbWavesEffect><i class="fas fa-info-circle"></i> Moderate</a>
               <a *ngIf="!isAdmin" (click)="switch()" class="nav-link waves-light" mdbWavesEffect><i class="fas fa-random"></i> Switch to Admin</a>
               <a *ngIf="isAdmin" (click)="switch()" class="nav-link waves-light" mdbWavesEffect><i class="fas fa-random"></i> Switch to User</a>
-              <a *ngIf="!isUser" (click)="fb('out')" routerLink="/signpage" routerLinkActive="active" class="nav-link waves-light" mdbWavesEffect><i class="fas fa-sign-out-alt"></i> Logout</a>
+              <a *ngIf="!isUser" (click)="out()" routerLink="/signpage" routerLinkActive="active" class="nav-link waves-light" mdbWavesEffect><i class="fas fa-sign-out-alt"></i> Logout</a>
             </div>
           </div>
         </li>

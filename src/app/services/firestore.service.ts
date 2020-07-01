@@ -10,19 +10,13 @@ import { isNull } from 'util';
   providedIn: 'root'
 })
 export class FirestoreService implements CanActivate  {
-  constructor(private router: Router, private loc : Location) {
-    this.timerHandler('on')
-   }
+  constructor(private router: Router, private loc : Location) { }
+  
   isAdminObserver = new BehaviorSubject(undefined)
-  timer : any
-  timerHandler = (action : string) => {
-    clearInterval(this.timer)
-    if (action === 'on'){
-      this.timer = setInterval(async ()=>{
-        console.log('pass next')
-        this.isAdminObserver.next(await this.isAdmin())
-      },1500)
-    }
+  private timer : any
+  async checkAdmin(){
+    console.log('checked')
+    this.isAdminObserver.next(await this.isAdmin())
 }
 
   canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot) :  Promise<boolean> | Observable<boolean>  | boolean {
@@ -68,14 +62,14 @@ export class FirestoreService implements CanActivate  {
       this.db.collection('admins').add({
         uid:uid
       })
-      .then(r=>{
-        this.isAdminObserver.next(true)
+      .then(async r=>{
+        this.isAdminObserver.next(await this.isAdmin())
       })
       .catch(e=>e)
     } else {
       this.db.collection('admins').doc(id).delete()
-      .then(r=>{
-        this.isAdminObserver.next(false)
+      .then(async r=>{
+        this.isAdminObserver.next(await this.isAdmin())
       })
       .catch(e=>e)
     }
