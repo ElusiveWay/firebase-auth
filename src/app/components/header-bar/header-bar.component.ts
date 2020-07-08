@@ -1,5 +1,4 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
-import * as firebase from "firebase/app"
 import "firebase/auth"
 import { isNull } from 'util';
 import { Subject } from 'rxjs'
@@ -21,7 +20,7 @@ export class HeaderBarComponent implements OnInit, OnDestroy {
       takeUntil(this.destroy$)
     ).subscribe((v)=> this.isAdmin = v)
     clearInterval(this.interval)
-    this.interval = setInterval(() => this.isUser = isNull(firebase.auth().currentUser), 100 )
+    this.interval = setInterval(() => this.isUser = isNull(this.auth.getUser()), 100 )
     this.fstore.checkAdmin()
   }
   ngOnDestroy(): void {

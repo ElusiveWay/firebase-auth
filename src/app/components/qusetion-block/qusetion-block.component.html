@@ -1,7 +1,19 @@
 <div    [ngClass]="{
+                    'line': subpanel && subpanel.line,
+                    'answered' : answered,
                     'finished' : finished && data.moded,
                     'notapproved': !data.moded,
-                    'normally': data.moded && !finished
+                    'normally': data.moded && !finished,
+                    'filterAns': subpanel && subpanel.answered,
+                    'filterRes': subpanel && subpanel.resolved,
+                    'AllDates' : subpanel && subpanel.date === 'All dates',
+                    'LastDay' : subpanel && subpanel.date === 'Last day' && day,
+                    'LastWeek' : subpanel && subpanel.date === 'Last week' && week,
+                    'LastMonth' : subpanel && subpanel.date === 'Last month' && month,
+                    'AllCategories' : subpanel && subpanel.categories === 'All categories',
+                    'Tag1' : subpanel && subpanel.categories === 'Tag 1' && tag1,
+                    'Tag2' : subpanel && subpanel.categories === 'Tag 2' && tag2,
+                    'Tag3' : subpanel && subpanel.categories === 'Tag 3' && tag3
                     }"
         data-id="{{data.id}}" 
         *ngIf="finished !== undefined"

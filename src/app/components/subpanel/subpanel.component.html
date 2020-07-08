@@ -1,0 +1,66 @@
+<ul class="subpanel nav justify-content-start grey lighten-4 py-4">
+    <li class="nav-item">
+        <a (click)="reset()"><i class="fas fa-redo"></i></a>
+    </li>
+    <li class="nav-item">
+        <div class="dropdown">
+            <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+              {{categories}}
+            </button>
+            <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                <span *ngFor="let i of categoriesArray">
+                    <a (click)="changeCategory(i)" class="dropdown-item" >{{i}}</a>
+                </span>
+            </div>
+          </div>
+    </li>
+    <li class="nav-item">
+        <div class="dropdown">
+            <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+              {{date}}
+            </button>
+            <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                <span *ngFor="let i of dateArray">
+                  <a (click)="changeDate(i)" class="dropdown-item" >{{i}}</a>
+                </span>  
+            </div>
+          </div>
+    </li>
+    <li class="nav-item">
+        <span (click)="changeSorter()" class="sort">Sort by date <i [ngClass]="{'reversed' :!sorted}" class="fas fa-caret-down"></i> </span>
+    </li>
+    <li class="nav-item">
+        <fieldset>
+            <input  class="form-check-input" (change)="refresh()" [(ngModel)]="resolved" name="Resolved" type="checkbox"  id="resolved-filter">
+            <label class="form-check-label" for="resolved-filter">
+            Resolved
+            </label>
+        </fieldset>
+    </li>
+    <li class="nav-item">
+        <fieldset>
+            <input  class="form-check-input" (change)="refresh()" [(ngModel)]="answered" name="Answered" type="checkbox"  id="answered-filter">
+            <label class="form-check-label" for="answered-filter">
+                Answered
+            </label>
+        </fieldset>
+    </li>
+    <li class="right nav-item">
+        <div class="dropdown">
+            <button class="btn btn-danger dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                <i class="fa fa-cog"></i>  Settings
+            </button>
+              <div class="dropdown-menu settings-drop" onclick="event.stopPropagation()"  aria-labelledby="dropdownMenuButton">
+              <span>Color:</span>
+              <input (input)="changeRange()" min="-100" max="100" type="range" name="settings-range" id="settings-range">
+              <hr>
+              <div class="toggle-custom">
+                <input (change)="changeLine()" [(ngModel)]="line" type="checkbox" id="toggle-view">
+                <label for="toggle-view"></label>
+                <span>Tile</span>
+                <span>Line</span>
+              </div>
+            </div>
+          </div>
+    </li>
+</ul>

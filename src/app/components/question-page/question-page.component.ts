@@ -2,13 +2,13 @@ import { Component, OnInit, OnDestroy } from '@angular/core';
 import { WaiterService } from '../../services/waiter.service'
 import { ActivatedRoute, Router } from '@angular/router';
 import { QuestionsService } from '../../services/add.question.service'
-import * as firebase from 'firebase'
 import { Subject } from 'rxjs' 
 import { takeUntil } from 'rxjs/operators' 
 import { isNull } from 'util'
 import { CommentService } from '../../services/comment.service'
 import { NotifyService } from '../../services/app.notify.service'
 import { FirestoreService } from '../../services/firestore.service'
+import { AuthService } from '../../services/auth.service'
 
 @Component({
   selector: 'app-question-page',
@@ -24,7 +24,8 @@ export class QuestionPageComponent implements OnInit, OnDestroy {
     private questions: QuestionsService,
     private comments: CommentService,
     private fstore: FirestoreService,
-    private note: NotifyService
+    private note: NotifyService,
+    private auth: AuthService
   ) {
     this.id = this.activateRoute.snapshot.params['id']
     this.date = new Date(1970, 0, 1)
@@ -40,10 +41,10 @@ export class QuestionPageComponent implements OnInit, OnDestroy {
       this.question = (quests.filter((el : any) => el.id === this.id).length > 0) ? quests.filter((el : any) => el.id === this.id)[0] : undefined
       this.date.setSeconds(this.question.date / 1000)
       this.author = (this.question && typeof this.question.owner === 'string') ? JSON.parse(this.question.owner) : {}
-      this.isOwner = (!isNull(firebase.auth().currentUser) && this.author.id === firebase.auth().currentUser.uid)
+      this.isOwner = (!isNull(this.auth.getUser()) && this.author.id === this.auth.getUser().uid)
       this.tags = (this.question && typeof this.question.tags === 'string') ? JSON.parse(this.question.tags) : []
       this.waiter.unwaiter()
-      this.user = firebase.auth().currentUser
+      this.user = this.auth.getUser()
       this.fstore.isAdminObserver.pipe(
         takeUntil(this.destroy$)
       ).subscribe((val) => {

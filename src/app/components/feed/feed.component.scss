@@ -13,6 +13,9 @@
 .spin{
     animation: spin .8s ease-out infinite;
 }
+.lineFlex{
+    flex-direction: column;
+}
 @media screen and (max-width: 750px){
     .feed{
         justify-self: center;

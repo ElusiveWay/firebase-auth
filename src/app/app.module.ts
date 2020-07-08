@@ -22,7 +22,8 @@ import { FirestoreService } from './services/firestore.service';
 import { ModerateComponent } from './components/moderate/moderate.component';
 import { QusetionBlockComponent } from './components/qusetion-block/qusetion-block.component';
 import { MyQuestionsComponent } from './components/my-questions/my-questions.component';
-import { QuestionPageComponent } from './components/question-page/question-page.component'
+import { QuestionPageComponent } from './components/question-page/question-page.component';
+import { SubpanelComponent } from './components/subpanel/subpanel.component';
 
 @NgModule({
   declarations: [
@@ -39,7 +40,8 @@ import { QuestionPageComponent } from './components/question-page/question-page.
     ModerateComponent,
     QusetionBlockComponent,
     MyQuestionsComponent,
-    QuestionPageComponent
+    QuestionPageComponent,
+    SubpanelComponent
   ],
   imports: [
     BrowserModule,

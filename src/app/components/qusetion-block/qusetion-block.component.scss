@@ -1,5 +1,5 @@
 .question-box{
-    display:flex;
+    display:none;
     flex-direction: column;
     align-items: center;
     width:380px;
@@ -7,6 +7,37 @@
     box-shadow: 0 0 5px gray;
     border:1px solid #d9d9d9 !important;
     margin:20px;
+    &.line{
+        width:90vw;
+        margin-left:5vw;
+        height: 270px;
+        h1{
+            font-size: 30px;
+            text-align: left;
+        }
+        & > div:nth-child(1){
+            justify-content: space-between;
+            padding-left:20px; 
+            padding-right:20px;
+        }
+    }
+    &.AllDates,
+    &.LastDay,
+    &.LastWeek,
+    &.LastMonth{
+        &.AllCategories,
+        &.Tag1,
+        &.Tag2,
+        &.Tag3{
+            display: flex;
+            &.filterRes:not(.finished){
+                display: none;
+            }
+            &.filterAns:not(.answered){
+                display: none;
+            }
+        }
+    }
     &  .quest-logo{
         display: none;
     }

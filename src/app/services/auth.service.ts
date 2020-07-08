@@ -44,5 +44,8 @@ export class AuthService {
     await fb('up',email ,pass, this.router)
     this.fstore.checkAdmin()
   }
+  getUser(){
+    return firebase.auth().currentUser
+  }
 
 }

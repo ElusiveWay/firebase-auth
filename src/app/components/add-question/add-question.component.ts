@@ -1,9 +1,10 @@
-import * as firebase from 'firebase'
-import { Component, OnInit, AfterViewInit } from '@angular/core';
+
+import { Component, AfterViewInit } from '@angular/core';
 import { FirestoreService } from '../../services/firestore.service'
 import { QuestionsService } from '../../services/add.question.service'
 import { NotifyService } from '../../services/app.notify.service'
 import { WaiterService } from '../../services/waiter.service'
+import { AuthService } from '../../services/auth.service'
 import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({
@@ -16,6 +17,7 @@ export class AddQuestionComponent implements AfterViewInit {
     public waiter: WaiterService, 
     public note: NotifyService, 
     public fstore : FirestoreService, 
+    public auth : AuthService, 
     public questions : QuestionsService,
     private arouter : ActivatedRoute,
     private router : Router
@@ -34,7 +36,7 @@ export class AddQuestionComponent implements AfterViewInit {
     this.question = temp.filter((el: any) => el.uid === this.uid)[0]
     if(this.question === undefined) return
     this.owner = JSON.parse(this.question.owner)
-    if (firebase.auth().currentUser && this.owner.id === firebase.auth().currentUser.uid){}
+    if (this.auth.getUser() && this.owner.id === this.auth.getUser().uid){}
     else{
       this.router.navigateByUrl(`/questions/${this.question.id}`)
       this.note.show({
