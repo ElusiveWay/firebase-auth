@@ -75,6 +75,7 @@ li.active{
     left:-100vw;
     opacity: 0;
     transform: translate(-50%,50%);
+    transition: left .5s linear 3.1s, transform .5s ease-out 2.5s,opacity .5s ease-out 2.5s;
 }
 .notificator-alert.alert{
     display: inline-block;
@@ -88,6 +89,6 @@ li.active{
     top:30%;
     transform: translate(-50%,-50%);
     white-space: pre-wrap;
-    transition: left .5s linear 3.1s, transform .5s ease-out 2.5s,opacity .5s ease-out 2.5s;
+    transition: unset;
 }
 @import './responsive.scss'

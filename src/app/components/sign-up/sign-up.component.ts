@@ -13,7 +13,7 @@ export class SignUpComponent implements OnInit {
 
   ngOnInit(): void {
   }
-  register(email: any, pass : any){
+  register(email: string, pass : string) : void{
     this.auth.Register(email, pass)
   }
   email: string 

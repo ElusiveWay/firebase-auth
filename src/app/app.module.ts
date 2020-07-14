@@ -19,11 +19,10 @@ import { AuthService } from './services/auth.service'
 import { NotifyService } from './services/app.notify.service';
 import { Logined } from './services/app-guard';
 import { FirestoreService } from './services/firestore.service';
-import { ModerateComponent } from './components/moderate/moderate.component';
 import { QusetionBlockComponent } from './components/qusetion-block/qusetion-block.component';
-import { MyQuestionsComponent } from './components/my-questions/my-questions.component';
 import { QuestionPageComponent } from './components/question-page/question-page.component';
 import { SubpanelComponent } from './components/subpanel/subpanel.component';
+import { NotificatorComponent } from './components/notificator/notificator.component';
 
 @NgModule({
   declarations: [
@@ -37,11 +36,10 @@ import { SubpanelComponent } from './components/subpanel/subpanel.component';
     SocialMediaComponent,
     FeedComponent,
     AddQuestionComponent,
-    ModerateComponent,
     QusetionBlockComponent,
-    MyQuestionsComponent,
     QuestionPageComponent,
-    SubpanelComponent
+    SubpanelComponent,
+    NotificatorComponent
   ],
   imports: [
     BrowserModule,

@@ -11,7 +11,7 @@ import { Router } from '@angular/router'
 export class SocialMediaComponent {
   constructor(public note: NotifyService, public authService: AuthService, public router : Router) { }
 
-  thenn = () => {
+  thenn = () : any => {
     const keys = ['Google', 'Facebook', 'Github']
     const action = (i : number) => {
       this.note.showSuccess(keys[i])
@@ -24,20 +24,20 @@ export class SocialMediaComponent {
     }
     
   }
-  catchh = (errorr : any) => {
+  catchh = (errorr : any) : void => {
     this.note.show({
       message : `Wrong!\n${errorr.message}!`,
       color: 'danger'
     })
   }
 
-  google(){
+  google() : void{
       this.authService.GoogleAuth(this.thenn().g, this.catchh)
   }
-  face(){
+  face() : void{
       this.authService.FacebookAuth(this.thenn().f, this.catchh)
   }
-  git(){
+  git() : void{
       this.authService.GithubAuth(this.thenn().gh, this.catchh)
   }
 }

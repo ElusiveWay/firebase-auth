@@ -1,15 +1,16 @@
 import { Injectable } from '@angular/core';
 import * as firebase from "firebase/app";
 import "firebase/auth";   
-import {fb} from '../scripts/firebase'  
+import {fbase} from '../scripts/firebase'  
 import { Router } from '@angular/router';
 import { FirestoreService } from '../services/firestore.service'
+import { NotifyService } from '../services/app.notify.service'
 
 @Injectable({
   providedIn: 'root'
 })
 export class AuthService {
-  constructor(private fstore: FirestoreService, public router : Router){}
+  constructor(private note: NotifyService, private fstore: FirestoreService, public router : Router){}
   FacebookAuth(thenn: any = ()=>{}, catchh : any = ()=>{}) {
     const face = new firebase.auth.FacebookAuthProvider();
     face.addScope('user_photos');
@@ -34,14 +35,23 @@ export class AuthService {
     })
   }
   Logout(){
-    fb('out')
+    fbase('out').then(()=>{
+      this.note.showLogout()
+    })
   }
   async EmailAuth(email: string, pass : string){
-    await fb('in',email ,pass, this.router)
+    await fbase('in',email ,pass, this.router).then(()=>{
+      this.note.showSuccess('Email')
+    })
     this.fstore.checkAdmin()
   }
   async Register(email: string, pass : string){
-    await fb('up',email ,pass, this.router)
+    await fbase('up',email ,pass, this.router).then(()=>{
+      this.note.show({
+        message : 'Finally!\n Welcome to community!',
+        color: 'success'
+      })
+    })
     this.fstore.checkAdmin()
   }
   getUser(){

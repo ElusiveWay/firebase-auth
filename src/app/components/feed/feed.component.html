@@ -1,17 +1,13 @@
 
 <app-subpanel></app-subpanel>
-<div [ngClass]="{'lineFlex' : subpanel.line}" class="feed">
+<div [ngClass]="{'lineFlex' : subpanel['line']}" class="feed">
     <div *ngFor="let q of (questions !== undefined)?questions.sort(sortFnc):[]">
         <app-qusetion-block 
-        *ngIf="(
-              (q.owner.indexOf(this.uid) !== -1 && this.flag==='my') || 
-              (!q.moded && this.flag==='mod' && this.isAdmin) || 
-              (this.flag!=='my' && this.flag!=='mod' && this.isAdmin !== undefined && ((!this.isAdmin && q.moded) || this.isAdmin))
-          )" 
+        *ngIf="showBlockExpression(q)" 
         (refreshData)="refresh()" [data]="q" [isAdmin]="isAdmin" ></app-qusetion-block>
     </div>
 </div>
-<h1 class="centered" *ngIf="isEmpty && flag=='mod' && isAdmin !== undefined && questions !== undefined">There is nothing to approve..</h1>
-<h1 class="centered" *ngIf="isEmpty && flag=='my' && isAdmin !== undefined && questions !== undefined">There are no your own questions..</h1>
-<h1 class="centered" *ngIf="isEmpty && flag!=='my' && flag!=='mod' && isAdmin !== undefined && questions !== undefined">There are no questions..</h1>
+<h1 class="centered" *ngIf="nothingToMod()">There is nothing to approve..</h1>
+<h1 class="centered" *ngIf="noOwnQuestions()">There are no your own questions..</h1>
+<h1 class="centered" *ngIf="noQuestions()">There are no questions..</h1>
 <h1 class="centered spin" *ngIf="isAdmin === undefined || questions === undefined"><i class="fas fa-sync-alt"></i></h1>

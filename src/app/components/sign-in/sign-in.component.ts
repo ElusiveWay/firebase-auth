@@ -12,7 +12,7 @@ export class SignInComponent implements OnInit {
   ngOnInit(): void {
 
   }
-  login(email: any, pass: any){
+  login(email: string, pass: string) : void{
     this.auth.EmailAuth(email, pass)
   }
   email: string

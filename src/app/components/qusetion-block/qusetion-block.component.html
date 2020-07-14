@@ -1,19 +1,19 @@
 <div    [ngClass]="{
-                    'line': subpanel && subpanel.line,
+                    'line': subpanel && subpanel['line'],
                     'answered' : answered,
-                    'finished' : finished && data.moded,
-                    'notapproved': !data.moded,
-                    'normally': data.moded && !finished,
-                    'filterAns': subpanel && subpanel.answered,
-                    'filterRes': subpanel && subpanel.resolved,
-                    'AllDates' : subpanel && subpanel.date === 'All dates',
-                    'LastDay' : subpanel && subpanel.date === 'Last day' && day,
-                    'LastWeek' : subpanel && subpanel.date === 'Last week' && week,
-                    'LastMonth' : subpanel && subpanel.date === 'Last month' && month,
-                    'AllCategories' : subpanel && subpanel.categories === 'All categories',
-                    'Tag1' : subpanel && subpanel.categories === 'Tag 1' && tag1,
-                    'Tag2' : subpanel && subpanel.categories === 'Tag 2' && tag2,
-                    'Tag3' : subpanel && subpanel.categories === 'Tag 3' && tag3
+                    'finished' : finished && data['moded'],
+                    'notapproved': !data['moded'],
+                    'normally': data['moded'] && !finished,
+                    'filterAns': subpanel && subpanel['answered'],
+                    'filterRes': subpanel && subpanel['resolved'],
+                    'AllDates' : subpanel && subpanel['date'] === 'All dates',
+                    'LastDay' : subpanel && subpanel['date'] === 'Last day' && day,
+                    'LastWeek' : subpanel && subpanel['date'] === 'Last week' && week,
+                    'LastMonth' : subpanel && subpanel['date'] === 'Last month' && month,
+                    'AllCategories' : subpanel && subpanel['categories'] === 'All categories',
+                    'Tag1' : subpanel && subpanel['categories'] === 'Tag 1' && tag1,
+                    'Tag2' : subpanel && subpanel['categories'] === 'Tag 2' && tag2,
+                    'Tag3' : subpanel && subpanel['categories'] === 'Tag 3' && tag3
                     }"
         data-id="{{data.id}}" 
         *ngIf="finished !== undefined"
@@ -24,7 +24,7 @@
         <i class=" quest-logo quest-logo3 fas fa-check-square"></i>
         <div class="contacts">
             <span class="date">{{date.toTimeString().slice(0,8)}} {{date.toLocaleDateString()}}</span>
-            <span class="date">{{owner.email}}</span>
+            <span class="date">{{owner['email']}}</span>
         </div>
     </div>
     <h1 class="title">{{data.title}}</h1>
@@ -39,8 +39,8 @@
     </div>
     <div class="bntss end">
         <button routerLink="/questions/{{data.id}}" routerLinkActive="active" class="btn btn-info open">Open</button>
-        <button *ngIf="( logined && (owner.id === logined.uid))" (click)=edit() class="btn btn-info open">Edit</button>
+        <button *ngIf="( logined && (owner['id'] === logined['uid']))" (click)=edit() class="btn btn-info open">Edit</button>
         <button (click)="approve(data.id)" *ngIf="isAdmin && !data.moded" class="btn btn-success approve">Approve</button>
-        <button *ngIf="( logined && (owner.id === logined.uid)) || isAdmin" (click)="delete(data.id)" class="btn btn-danger delete">Delete</button>
+        <button *ngIf="( logined && (owner['id'] === logined['uid'])) || isAdmin" (click)="delete(data.id)" class="btn btn-danger delete">Delete</button>
     </div>
 </div>

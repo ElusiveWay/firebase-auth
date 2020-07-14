@@ -10,25 +10,13 @@
         <label for="new-question-text-input" class="text-title">Text</label>
         <textarea rows="5" [(ngModel)]="text" minlength="20" required #text1="ngModel" id="new-question-text-input" placeholder="Describe your question" class="form-control text-input"></textarea>
     </fieldset>
-    <div class="form-check">
-        <input class="form-check-input" name="Tag 1" type="checkbox"  id="new-question-defaultCheck1">
-        <label class="form-check-label" for="new-question-defaultCheck1">
-          Tag 1
+    <div *ngFor="let tag of allTags; let i = index" class="form-check">
+        <input class="form-check-input" name="{{tag}}" type="checkbox"  id="new-question-defaultCheck{{i + 1}}">
+        <label class="form-check-label" for="new-question-defaultCheck{{i + 1}}">
+          {{tag}}
         </label>
-      </div>
-      <div class="form-check">
-        <input class="form-check-input" name="Tag 2" type="checkbox"  id="new-question-defaultCheck2">
-        <label class="form-check-label" for="new-question-defaultCheck2">
-          Tag 2
-        </label>
-      </div>
-      <div class="form-check">
-        <input  class="form-check-input" name="Tag 3" type="checkbox"  id="new-question-defaultCheck3">
-        <label class="form-check-label" for="new-question-defaultCheck3">
-          Tag 3
-        </label>
-        <br>
-        <button *ngIf="uid === undefined" (click)="submit()" [disabled]="ti.invalid || text1.invalid"  class="new-question-submit btn btn-primary"><i class="fas fa-plus"></i> Add question</button>
-        <button *ngIf="uid !== undefined" (click)="edit()" [disabled]="ti.invalid || text1.invalid"  class="new-question-submit btn btn-primary"><i class="fas fa-edit"></i> Edit question</button>
+        <br *ngIf="i === allTags.length-1">
+        <button *ngIf="i === allTags.length-1 && uid === undefined" (click)="submit()" [disabled]="ti.invalid || text1.invalid"  class="new-question-submit btn btn-primary"><i class="fas fa-plus"></i> Add question</button>
+        <button *ngIf="i === allTags.length-1 && uid !== undefined" (click)="edit()" [disabled]="ti.invalid || text1.invalid"  class="new-question-submit btn btn-primary"><i class="fas fa-edit"></i> Edit question</button>
       </div>
 </div>

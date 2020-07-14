@@ -33,13 +33,13 @@ export class CommentService {
       solution: true
     })
   }
-  async  addComment(questId : string){
+  async addComment(questId : string, message : string){
     if (isNull(firebase.auth().currentUser)) {
       return false
     }
     await this.db.collection('comments').add({
       date: new Date().getTime(),
-      text: (document.querySelector('#comment-area-input') as  HTMLInputElement).value,
+      text: message,
       solution: false,
       owner: (firebase.auth().currentUser) ? 
       JSON.stringify({

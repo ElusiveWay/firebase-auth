@@ -14,7 +14,6 @@ import { AuthService } from '../../services/auth.service'
 export class HeaderBarComponent implements OnInit, OnDestroy {
 
   constructor(private auth : AuthService, private fstore : FirestoreService) { }
-  private destroy$: Subject<void> = new Subject<void>();
   ngOnInit(): void {
     this.fstore.isAdminObserver.pipe(
       takeUntil(this.destroy$)
@@ -30,12 +29,14 @@ export class HeaderBarComponent implements OnInit, OnDestroy {
   }
   interval : any
   isUser: boolean
-  switch = function(){
+  switch = function() : void{
     this.fstore.toggleAdmin()
   }
-  out(){
+  out() : void{
     this.auth.Logout()
   }
-  sub : any
-  isAdmin : any = false
+
+  private destroy$: Subject<void> = new Subject<void>()
+  isAdmin : boolean = false
+
 }

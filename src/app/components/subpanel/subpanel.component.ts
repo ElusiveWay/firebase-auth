@@ -2,6 +2,7 @@ import { Component, OnInit, OnDestroy } from '@angular/core';
 import { ShareService } from '../../services/share.service'
 import { takeUntil } from 'rxjs/operators'
 import { Subject } from 'rxjs';
+import { TAGS } from '../../app.params'
 @Component({
   selector: 'app-subpanel',
   templateUrl: './subpanel.component.html',
@@ -10,6 +11,7 @@ import { Subject } from 'rxjs';
 export class SubpanelComponent implements OnInit, OnDestroy {
 
   constructor( public shared : ShareService ) { }
+  allTags : string[]
   $destroy : Subject<void> = new Subject<void>()
   dateArray : Array<string> = [
     'All dates',
@@ -18,10 +20,7 @@ export class SubpanelComponent implements OnInit, OnDestroy {
     'Last month'
   ]
   categoriesArray : Array<string> = [
-    'All categories',
-    'Tag 1',
-    'Tag 2',
-    'Tag 3'
+    'All categories', ...TAGS
   ]
 
 
@@ -42,7 +41,7 @@ export class SubpanelComponent implements OnInit, OnDestroy {
   }
 
 
-  refresh(){
+  refresh() : void{
     this.shared.setSubpanel({
       answered: this.answered,
       resolved: this.resolved,
@@ -52,19 +51,19 @@ export class SubpanelComponent implements OnInit, OnDestroy {
       line: this.line
     })
   }
-  changeDate(string: string){
+  changeDate(string: string) : void{
     this.date = string
     this.refresh()
   }
-  changeCategory(string: string){
+  changeCategory(string: string) : void{
     this.categories = string
     this.refresh()
   }
-  changeSorter(){
+  changeSorter() : void{
     this.sorted = !this.sorted
     this.refresh()
   }
-  reset(){
+  reset() : void{
     this.shared.setSubpanel()
   }
   changeRange() {
@@ -72,7 +71,7 @@ export class SubpanelComponent implements OnInit, OnDestroy {
     document.querySelector('body').style.filter = `hue-rotate(${(event.target as HTMLInputElement).value * 1.8 }deg)`
     localStorage.setItem('color', (event.target as HTMLInputElement).value)
   }
-  changeLine(){
+  changeLine() : void{
     this.refresh()
   }
 
@@ -82,4 +81,5 @@ export class SubpanelComponent implements OnInit, OnDestroy {
   date: string
   categories: string
   line: boolean
+  
 }

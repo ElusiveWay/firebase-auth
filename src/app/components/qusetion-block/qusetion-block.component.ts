@@ -47,18 +47,18 @@ export class QusetionBlockComponent implements OnInit, OnDestroy {
   @Output() refreshData = new EventEmitter;
 
   date : Date
-  mytags : any
+  mytags : Array<string>
   logined = this.auth.getUser()
-  owner : any
-  finished : any = undefined
-  answered : any = undefined
-  subpanel : any 
-  day: any
-  week: any
-  month: any
-  tag1: any
-  tag2: any
-  tag3: any
+  owner : Object
+  finished : boolean = undefined
+  answered : boolean = undefined
+  subpanel : boolean 
+  day: boolean
+  week: boolean
+  month: boolean
+  tag1: boolean
+  tag2: boolean
+  tag3: boolean
   async delete(id : any){
     if (confirm('Delete?')) {
       await this.questions.deleteQuestion(id)
@@ -69,7 +69,7 @@ export class QusetionBlockComponent implements OnInit, OnDestroy {
     await this.questions.approveQuestion(id)
     this.refreshData.next()
   }
-  edit(){
+  edit() : void{
     if (this.data !== undefined) this.router.navigateByUrl(`/edit/${this.data.uid}`)
   }
 }

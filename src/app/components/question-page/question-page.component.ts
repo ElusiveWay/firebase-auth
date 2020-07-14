@@ -30,7 +30,6 @@ export class QuestionPageComponent implements OnInit, OnDestroy {
     this.id = this.activateRoute.snapshot.params['id']
     this.date = new Date(1970, 0, 1)
    }
-  private destroy$: Subject<void> = new Subject<void>();
   ngOnDestroy() : void {
     this.destroy$.next()
     this.destroy$.complete()
@@ -39,10 +38,10 @@ export class QuestionPageComponent implements OnInit, OnDestroy {
       this.waiter.waiter()
       const quests = await this.questions.getQuestions()
       this.question = (quests.filter((el : any) => el.id === this.id).length > 0) ? quests.filter((el : any) => el.id === this.id)[0] : undefined
-      this.date.setSeconds(this.question.date / 1000)
-      this.author = (this.question && typeof this.question.owner === 'string') ? JSON.parse(this.question.owner) : {}
-      this.isOwner = (!isNull(this.auth.getUser()) && this.author.id === this.auth.getUser().uid)
-      this.tags = (this.question && typeof this.question.tags === 'string') ? JSON.parse(this.question.tags) : []
+      this.date.setSeconds(this.question['date'] / 1000)
+      this.author = (this.question && typeof this.question['owner'] === 'string') ? JSON.parse(this.question['owner']) : {}
+      this.isOwner = (!isNull(this.auth.getUser()) && this.author['id'] === this.auth.getUser().uid)
+      this.tags = (this.question && typeof this.question['tags'] === 'string') ? JSON.parse(this.question['tags']) : []
       this.waiter.unwaiter()
       this.user = this.auth.getUser()
       this.fstore.isAdminObserver.pipe(
@@ -63,7 +62,7 @@ export class QuestionPageComponent implements OnInit, OnDestroy {
     const backup = this.message;
     this.message = ''
     if (this.id === undefined) return
-    await this.comments.addComment(this.id)
+    await this.comments.addComment(this.id, backup)
     .then(_=>{
       this.note.show({
         message: 'Commented!',
@@ -93,7 +92,7 @@ export class QuestionPageComponent implements OnInit, OnDestroy {
     this.refresh()
   }
   async approve(){
-    if (this.question) this.questions.approveQuestion(this.question.id).then(_=>{
+    if (this.question) this.questions.approveQuestion(this.question['id']).then(_=>{
         this.approved = true;
         this.note.show({
           message: 'Approved!',
@@ -106,13 +105,13 @@ export class QuestionPageComponent implements OnInit, OnDestroy {
       })
     })
   }
-  edit(){
-    if (this.question !== undefined) this.router.navigateByUrl(`/edit/${this.question.uid}`)
+  edit() : void{
+    if (this.question !== undefined) this.router.navigateByUrl(`/edit/${this.question['uid']}`)
   }
   async delete(){
-    if(!this.question && !this.question.id) return
+    if(!this.question && !this.question['id']) return
     if (confirm('Delete?')) {
-      await this.questions.deleteQuestion(this.question.id).then(_=>{
+      await this.questions.deleteQuestion(this.question['id']).then(_=>{
         this.router.navigateByUrl(`/main`)
         this.note.show({
           message: 'Deleted!',
@@ -126,15 +125,18 @@ export class QuestionPageComponent implements OnInit, OnDestroy {
       })
     }
   }
+
+  private destroy$: Subject<void> = new Subject<void>()
   approved = false
-  isAdmin: any = false
-  isOwner: any
-  user : any
-  date : any
-  question: any
+  isAdmin: boolean = false
+  isOwner: boolean
   id : string
-  author: any
-  tags : Array<any>
   message : string = ''
-  comms : any
+  date : Date
+  tags : Array<any>
+  user : Object
+  question: Object
+  author: Object
+  comms : Array<any>
+
 }

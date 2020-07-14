@@ -16,7 +16,7 @@ export class QuestionsService {
   db = firebase.firestore();
 
   async getQuestions(){
-    let ret : any = []
+    let ret : Array<any> = []
     await this.db.collection('questions').get()
     .then(r=>{
       r.forEach((doc)=>{
@@ -71,26 +71,16 @@ export class QuestionsService {
       })
     })
   }
-  async addQuestion(){
+  async addQuestion(title : string, text : string, tagsJson : string){
     if (isNull(firebase.auth().currentUser)) {
       return false
     }
     await this.db.collection('questions').add({
       moded: false,
       date: new Date().getTime(),
-      title: (document.querySelector('#new-question-title-input') as  HTMLInputElement).value,
-      text: (document.querySelector('#new-question-text-input') as  HTMLInputElement).value,
-      tags: JSON.stringify(
-              Array.prototype.map.call(document.querySelectorAll('[id*="new-question-defaultCheck"'), 
-                (el : any)=>{
-                  return {
-                    name: el.name,
-                    value: el.checked
-                  }
-              })
-              .filter((obj: any) => obj.value != false)
-              .map((obj: any) => obj.name)
-            ),
+      title: title,
+      text: text,
+      tags: tagsJson,
       owner: (firebase.auth().currentUser) ? 
       JSON.stringify({
         id : firebase.auth().currentUser.uid,
