@@ -4,6 +4,8 @@
   </div>
   <div class="waiter"></div>
   <app-header-bar></app-header-bar>
-  <router-outlet></router-outlet>
+  <div [@fadeInAnimation]="outlet.isActivated ? outlet.activatedRoute : ''">
+    <router-outlet #outlet="outlet"></router-outlet>
+  </div>
   <app-footer-bar></app-footer-bar>
 </div>

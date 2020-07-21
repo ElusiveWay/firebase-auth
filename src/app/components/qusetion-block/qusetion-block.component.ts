@@ -6,6 +6,7 @@ import { ShareService } from '../../services/share.service'
 import { AuthService } from '../../services/auth.service'
 import { takeUntil } from 'rxjs/operators'
 import { Subject } from 'rxjs'
+import { TIME_OFFSET } from '../../app.params'
 @Component({
   selector: 'app-qusetion-block',
   templateUrl: './qusetion-block.component.html',
@@ -28,10 +29,7 @@ export class QusetionBlockComponent implements OnInit, OnDestroy {
     this.tag1 = this.mytags.includes('Tag 1')
     this.tag2 = this.mytags.includes('Tag 2')
     this.tag3 = this.mytags.includes('Tag 3')
-    this.date.setSeconds(this.data.date / 1000)
-    this.day = (new Date().getTime() - this.data.date < 86401000)
-    this.week = (new Date().getTime() - this.data.date < 86401000 * 7)
-    this.month = (new Date().getTime() - this.data.date < 86401000 * 30)
+    this.date.setSeconds(this.data.date / 1000 + TIME_OFFSET)
     let commse = await this.comms.getComments(this.data.id)
     this.answered = commse.length > 0
     commse = commse.filter((el : any)=> el.solution === true)
@@ -53,9 +51,6 @@ export class QusetionBlockComponent implements OnInit, OnDestroy {
   finished : boolean = undefined
   answered : boolean = undefined
   subpanel : boolean 
-  day: boolean
-  week: boolean
-  month: boolean
   tag1: boolean
   tag2: boolean
   tag3: boolean

@@ -68,7 +68,7 @@ export class SubpanelComponent implements OnInit, OnDestroy {
   }
   changeRange() {
     //@ts-ignore
-    document.querySelector('body').style.filter = `hue-rotate(${(event.target as HTMLInputElement).value * 1.8 }deg)`
+    document.querySelector('html').style.filter = `hue-rotate(${(event.target as HTMLInputElement).value * 1.8 }deg)`
     localStorage.setItem('color', (event.target as HTMLInputElement).value)
   }
   changeLine() : void{

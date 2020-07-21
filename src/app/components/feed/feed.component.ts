@@ -1,5 +1,5 @@
 import { Component, OnInit, OnDestroy, Input, AfterViewChecked  } from '@angular/core';
-import { Subscription, Subject } from 'rxjs';
+import { Subscription, Subject, BehaviorSubject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators'
 import { Router } from '@angular/router'
 import { FirestoreService } from '../../services/firestore.service'
@@ -17,6 +17,7 @@ export class FeedComponent implements OnInit, OnDestroy, AfterViewChecked {
   constructor( private router : Router, public auth: AuthService, public comms: CommentService, public shared: ShareService, private quest: QuestionsService, private fstore : FirestoreService) {
     this.sortFnc = this.sortFnc.bind(this)
     this.flag = this.router.url.replace(/[|&;$%@"<>()+,\\\/]/g, "")
+    this.share = this.shared.fade
   }
   async ngOnInit() { 
     this.fstore.isAdminObserver.pipe(
@@ -33,23 +34,26 @@ export class FeedComponent implements OnInit, OnDestroy, AfterViewChecked {
           else {this.sorter = 1}
         }
       })
+    this.shared.fade.pipe(
+        takeUntil(this.destroy$)
+      ).subscribe(val => {
+        this.length = val
+      })
     this.refresh()
   }
   private destroy$: Subject<void> = new Subject<void>();
   ngAfterViewChecked() :void{
-    const adm = this.isAdmin,
-          que = this.questions
-          setTimeout(() => {
-            if (adm !== undefined && que !== undefined) this.isEmpty = document.querySelectorAll('.question-box').length === 0
-          })
+          this.isEmpty = this.length === 0
   }
-  ngOnDestroy(): void {
+  async ngOnDestroy() {
     this.destroy$.next()
     this.destroy$.complete()
   }
   async refresh() {
     this.questions = await this.quest.getQuestions()
     this.questions = this.questions.sort((a,b) => b.date - a.date)
+    this.quests = this.questions || []
+    this.comments = await this.comms.getComments()
   }
   nothingToMod = () : boolean => {
     return this.isEmpty && this.flag=='moderate' && this.isAdmin !== undefined && this.questions !== undefined
@@ -70,13 +74,17 @@ export class FeedComponent implements OnInit, OnDestroy, AfterViewChecked {
   sortFnc(){  
     return this.sorter
   }
-  
+
+  length : number
+  share : BehaviorSubject<any>
   subpanel : Object
   isEmpty : boolean 
   questions: Array<any> = undefined
+  quests: Array<any> = []
   isAdmin : boolean = undefined
   sorter: number = 1
   flag : string
+  comments : Array<any>
   uid : string = (this.auth.getUser()) ? this.auth.getUser().uid : ''
   
 }

@@ -14,7 +14,7 @@ export class CommentService {
     ) { }
     
   db = firebase.firestore();
-  async getComments(questId : string){
+  async getComments(questId : string = 'all'){
     let ret : any = []
     await this.db.collection('comments').get()
     .then(r=>{
@@ -25,7 +25,9 @@ export class CommentService {
       })
     })
     .catch(e=>e)
-    ret = ret.filter((el: any) => el.question === questId)
+    if (questId !== 'all'){
+      ret = ret.filter((el: any) => el.question === questId)
+    }
     return ret
   }
   async solution(cmoId: string){

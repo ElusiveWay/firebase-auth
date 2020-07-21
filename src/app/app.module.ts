@@ -5,6 +5,7 @@ import { FormsModule } from '@angular/forms'
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { MDBBootstrapModule } from 'angular-bootstrap-md';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 import { UserContentComponent } from './components/user-content/user-content.component';
 import { SignUpComponent } from './components/sign-up/sign-up.component';
@@ -24,6 +25,8 @@ import { QuestionPageComponent } from './components/question-page/question-page.
 import { SubpanelComponent } from './components/subpanel/subpanel.component';
 import { NotificatorComponent } from './components/notificator/notificator.component';
 
+import { QuestionsPipePipe } from './questions-pipe.pipe';
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -39,13 +42,15 @@ import { NotificatorComponent } from './components/notificator/notificator.compo
     QusetionBlockComponent,
     QuestionPageComponent,
     SubpanelComponent,
-    NotificatorComponent
+    NotificatorComponent,
+    QuestionsPipePipe
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     FormsModule,
-    MDBBootstrapModule.forRoot()
+    MDBBootstrapModule.forRoot(),
+    BrowserAnimationsModule
   ],
   providers: [ AuthService, NotifyService, Logined, FirestoreService  ],
   bootstrap: [ AppComponent ]

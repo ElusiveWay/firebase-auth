@@ -25,8 +25,10 @@ const DefaultSubpanel : Subpanel = {
 export class ShareService {
   constructor() {
     this.share = new BehaviorSubject( {subpanel : DefaultSubpanel} )
+    this.fade = new BehaviorSubject( false )
    }
   share : BehaviorSubject<any>
+  fade : BehaviorSubject<any>
   async setSubpanel(input : Subpanel = DefaultSubpanel){
     const prev = await this.share.getValue()
     const current = {

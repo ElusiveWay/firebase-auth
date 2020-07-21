@@ -9,7 +9,7 @@ import { CommentService } from '../../services/comment.service'
 import { NotifyService } from '../../services/app.notify.service'
 import { FirestoreService } from '../../services/firestore.service'
 import { AuthService } from '../../services/auth.service'
-
+import { TIME_OFFSET } from '../../app.params'
 @Component({
   selector: 'app-question-page',
   templateUrl: './question-page.component.html',
@@ -38,7 +38,7 @@ export class QuestionPageComponent implements OnInit, OnDestroy {
       this.waiter.waiter()
       const quests = await this.questions.getQuestions()
       this.question = (quests.filter((el : any) => el.id === this.id).length > 0) ? quests.filter((el : any) => el.id === this.id)[0] : undefined
-      this.date.setSeconds(this.question['date'] / 1000)
+      this.date.setSeconds(this.question['date'] / 1000 + TIME_OFFSET)
       this.author = (this.question && typeof this.question['owner'] === 'string') ? JSON.parse(this.question['owner']) : {}
       this.isOwner = (!isNull(this.auth.getUser()) && this.author['id'] === this.auth.getUser().uid)
       this.tags = (this.question && typeof this.question['tags'] === 'string') ? JSON.parse(this.question['tags']) : []
